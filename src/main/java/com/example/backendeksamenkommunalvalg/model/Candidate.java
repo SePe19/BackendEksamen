@@ -24,7 +24,7 @@ public class Candidate {    //De beholdes i programmet midlertidigt, men skal no
     @Column(name = "candidate_name")
     private String candidateName;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "party_id")
     public Party party;
 

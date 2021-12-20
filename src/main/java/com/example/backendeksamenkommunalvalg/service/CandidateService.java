@@ -25,6 +25,14 @@ public class CandidateService {
         return candidateRepository.findById(id).orElseThrow(() -> new NoResultException("Candidate with id: " + id + " doesn't exist"));
     }
 
+    public List<Candidate> findAllCandidates() {
+        return candidateRepository.findAll();
+    }
+
+    public List<Candidate> findAllCandidatesOnParty(Integer id) {
+        return candidateRepository.findCandidatesByPartyId(id);
+    }
+
     public Candidate saveCandidate(Candidate candidate) {
         return candidateRepository.save(candidate);
     }
@@ -37,7 +45,7 @@ public class CandidateService {
         return candidateRepository.save(candidateData);
     }
 
-    public List<Candidate> findAllCandidates() {
-        return candidateRepository.findAll();
+    public void deleteCandidate(Integer id){
+        candidateRepository.deleteById(id);
     }
 }

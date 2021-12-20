@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Set;
 
 @org.springframework.web.bind.annotation.RestController
 @CrossOrigin
 public class CandidateRestController { //Bruges til alt omhandlende candidates
 
     private CandidateService candidateService;
-    private PartyService partyService;
 
     public CandidateRestController(CandidateService candidateService) {
         this.candidateService = candidateService;
@@ -31,9 +31,15 @@ public class CandidateRestController { //Bruges til alt omhandlende candidates
     }
 
     @GetMapping("/showAllCandidates")
-    public ResponseEntity<List<Candidate>> showAllProjects(){
-        List<Candidate> projects = candidateService.findAllCandidates();
-        return new ResponseEntity<>(projects, HttpStatus.OK);
+    public ResponseEntity<List<Candidate>> showAllCandidates(){
+        List<Candidate> candidates = candidateService.findAllCandidates();
+        return new ResponseEntity<>(candidates, HttpStatus.OK);
+    }
+
+    @GetMapping("/partyCandidates/{id}")
+    public ResponseEntity<List<Candidate>> showCandidatesOnParty(@PathVariable Integer id){
+        List<Candidate> candidates = candidateService.findAllCandidatesOnParty(id);
+        return new ResponseEntity<>(candidates, HttpStatus.OK);
     }
 
     @PostMapping("/candidate")
@@ -47,5 +53,11 @@ public class CandidateRestController { //Bruges til alt omhandlende candidates
     public ResponseEntity<Candidate> updateCandidate(@PathVariable Integer id, @RequestBody EditCandidate editCandidate) {
         Candidate tmpCandidate = candidateService.updateCandidate(editCandidate, id);
         return ResponseEntity.ok().body(tmpCandidate);
+    }
+
+    @DeleteMapping("/candidate/{id}")
+    public ResponseEntity<?> deleteCandidate(@PathVariable Integer id) {
+        candidateService.deleteCandidate(id);
+        return ResponseEntity.ok().build();
     }
 }
