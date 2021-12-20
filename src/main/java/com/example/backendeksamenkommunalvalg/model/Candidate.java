@@ -14,7 +14,7 @@ import java.util.Objects;
 @ToString
 @Entity
 @Table(name = "candidate")  //Table og Column annotationen bruges ikke, idet databasen og dets indhold oprettes af schema.sql og data.sql
-public class Candidate {    //De beholdes i programmet midlertidigt indtil, der skulle findes en bedre metode
+public class Candidate {    //De beholdes i programmet midlertidigt, men skal nok fjernes
 
     @Id
     @Column(name = "candidate_id")
@@ -26,7 +26,7 @@ public class Candidate {    //De beholdes i programmet midlertidigt indtil, der 
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "party_id")
-    private Party party;
+    public Party party;
 
     @Override
     public boolean equals(Object o) {

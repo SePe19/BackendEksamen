@@ -17,7 +17,7 @@ import java.util.Set;
 @ToString
 @Entity
 @Table(name = "party")  //Table og Column annotationen bruges ikke, idet databasen og dets indhold oprettes af schema.sql og data.sql
-public class Party {    //De beholdes i programmet midlertidigt indtil, der skulle findes en bedre metode
+public class Party {    //De beholdes i programmet midlertidigt, men skal nok fjernes
 
     @Id
     @Column(name = "party_id")

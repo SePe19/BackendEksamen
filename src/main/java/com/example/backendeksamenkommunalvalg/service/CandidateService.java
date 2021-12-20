@@ -1,6 +1,7 @@
 package com.example.backendeksamenkommunalvalg.service;
 
 import com.example.backendeksamenkommunalvalg.model.Candidate;
+import com.example.backendeksamenkommunalvalg.model.EditCandidate;
 import com.example.backendeksamenkommunalvalg.repository.CandidateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +13,12 @@ import java.util.List;
 public class CandidateService {
 
     private CandidateRepository candidateRepository;
+    private PartyService partyService;
 
     @Autowired
-    public CandidateService(CandidateRepository candidateRepository) {
+    public CandidateService(CandidateRepository candidateRepository, PartyService partyService) {
         this.candidateRepository = candidateRepository;
+        this.partyService = partyService;
     }
 
     public Candidate findById(Integer id) {
@@ -26,12 +29,12 @@ public class CandidateService {
         return candidateRepository.save(candidate);
     }
 
-    public Candidate updateCandidate(Candidate candidate, Integer id) {
+    public Candidate updateCandidate(EditCandidate editCandidate, Integer id) {
         Candidate candidateData = candidateRepository.findById(id).orElseThrow(() -> new NoResultException("Candidate with id: " + id + " does not exist"));
-        candidateData.setCandidateId(candidate.getCandidateId());
-        candidateData.setCandidateName(candidate.getCandidateName());
-        //candidateData.setParty(candidate.getParty);
-        return candidateRepository.save(candidate);
+        candidateData.setCandidateId(editCandidate.getCandidateId());
+        candidateData.setCandidateName(editCandidate.getCandidateName());
+        candidateData.setParty(partyService.findPartyByPartyName(editCandidate.getPartyName()));
+        return candidateRepository.save(candidateData);
     }
 
     public List<Candidate> findAllCandidates() {

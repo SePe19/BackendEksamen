@@ -20,18 +20,22 @@ public class PartyService {
     public Party findById(Integer id) {
         return partyRepository.findById(id).orElseThrow(() -> new NoResultException("Party with id: " + id + " doesn't exist"));
     }
+
+    public Party findPartyByPartyName(String name) {
+        return partyRepository.findPartyByPartyName(name);
+    }
 /*
     public Candidate saveCandidate(Candidate candidate) {
         return candidateRepository.save(candidate);
     }
-
-    public Candidate updateCandidate(Candidate candidate, Integer id) {
-        Candidate candidateData = candidateRepository.findById(id).orElseThrow(() -> new NoResultException("Candidate with id: " + id + " does not exist"));
-        candidateData.setCandidateId(candidate.getCandidateId());
-        candidateData.setCandidateName(candidate.getCandidateName());
-        //candidateData.setParty(candidate.getParty);
-        return candidateRepository.save(candidate);
+*/
+    public Party updateParty(Party party, Integer id) {
+        Party partyData = partyRepository.findById(id).orElseThrow(() -> new NoResultException("Candidate with id: " + id + " does not exist"));
+        partyData.setPartyId(party.getPartyId());
+        partyData.setPartyName(party.getPartyName());
+        return partyRepository.save(party);
     }
+    /*
 
     public List<Candidate> findAllCandidates() {
         return candidateRepository.findAll();
