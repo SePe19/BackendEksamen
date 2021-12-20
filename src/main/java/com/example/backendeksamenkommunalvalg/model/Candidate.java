@@ -13,8 +13,8 @@ import java.util.Objects;
 @Setter
 @ToString
 @Entity
-@Table(name = "candidate")
-public class Candidate {
+@Table(name = "candidate")  //Table og Column annotationen bruges ikke, idet databasen og dets indhold oprettes af schema.sql og data.sql
+public class Candidate {    //De beholdes i programmet midlertidigt indtil, der skulle findes en bedre metode
 
     @Id
     @Column(name = "candidate_id")

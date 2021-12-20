@@ -19,12 +19,12 @@ public class CandidateRestController {
     public CandidateRestController(CandidateService candidateService) {
         this.candidateService = candidateService;
     }
-/*
-    @GetMapping("/showAllCandidatesFromParty/{id}")
-    public ResponseEntity<List<Candidate>> findAllCandidatesFromParty(Integer id){
-        List<Candidate> candidatesFromParty = candidateService.findAllCandidatesFromParty(id);
-        return new ResponseEntity<>(candidatesFromParty, HttpStatus.OK);
-    }*/
+
+    @GetMapping("/candidate/{id}")
+    public ResponseEntity<Candidate> getProject(@PathVariable Integer id){
+        Candidate project = candidateService.findById(id);
+        return new ResponseEntity<>(project, HttpStatus.OK);
+    }
 
     @PostMapping("/candidate")
     public ResponseEntity<Candidate> createCandidate(@RequestBody Candidate candidate) throws URISyntaxException {
@@ -32,18 +32,11 @@ public class CandidateRestController {
         result = candidateService.saveCandidate(candidate);
         return ResponseEntity.created(new URI("/candidate/" + result.getCandidateId())).body(result);
     }
-/*
+
     @GetMapping("/showAllCandidates")
     public ResponseEntity<List<Candidate>> showAllProjects(){
         List<Candidate> projects = candidateService.findAllCandidates();
         return new ResponseEntity<>(projects, HttpStatus.OK);
     }
 
-    @PutMapping("/candidate/{id}")
-    public ResponseEntity<Candidate> updateCandidate(@PathVariable Integer id, @RequestBody Candidate candidate) {
-        Candidate tmpCandidate = candidateService.updateCandidate(candidate, id);
-        return ResponseEntity.ok().body(tmpCandidate);
-    }
-
-    @DeleteMapping("/candidate/{id}")*/
 }

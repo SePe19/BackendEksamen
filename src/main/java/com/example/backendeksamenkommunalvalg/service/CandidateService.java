@@ -37,10 +37,4 @@ public class CandidateService {
     public List<Candidate> findAllCandidates() {
         return candidateRepository.findAll();
     }
-
-    public List<Candidate> findAllCandidatesFromParty(Integer id) {
-        List<Candidate> tmpCandidates = candidateRepository.findAllByPartyId(id);
-        return tmpCandidates;
-    }
-
 }

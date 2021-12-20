@@ -16,21 +16,24 @@ import java.util.Set;
 @Setter
 @ToString
 @Entity
-@Table(name = "party")
-public class Party {
+@Table(name = "party")  //Table og Column annotationen bruges ikke, idet databasen og dets indhold oprettes af schema.sql og data.sql
+public class Party {    //De beholdes i programmet midlertidigt indtil, der skulle findes en bedre metode
 
     @Id
     @Column(name = "party_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer partyId;
 
+    @Column(name = "party_letter")
+    private String partyLetter;
+
     @Column(name = "party_name")
     private String partyName;
 
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JoinColumn(name = "candidate_id")
+    @JoinColumn(name = "party_id")
     @JsonBackReference
-    private Set<Candidate> candidateSet = new HashSet<>();
+    private Set<Candidate> candidatePartySet = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
