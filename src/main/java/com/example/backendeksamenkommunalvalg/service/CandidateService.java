@@ -37,11 +37,11 @@ public class CandidateService {
         return candidateRepository.save(candidate);
     }
 
-    public Candidate updateCandidate(EditCandidate editCandidate, Integer id) {
+    public Candidate updateCandidate(Candidate editCandidate, Integer id) {
         Candidate candidateData = candidateRepository.findById(id).orElseThrow(() -> new NoResultException("Candidate with id: " + id + " does not exist"));
         candidateData.setCandidateId(editCandidate.getCandidateId());
         candidateData.setCandidateName(editCandidate.getCandidateName());
-        candidateData.setParty(partyService.findPartyByPartyName(editCandidate.getPartyName()));
+        //candidateData.setParty(partyService.findPartyByPartyName(editCandidate.getPartyName()));
         return candidateRepository.save(candidateData);
     }
 

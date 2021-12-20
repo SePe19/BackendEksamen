@@ -1,5 +1,6 @@
 package com.example.backendeksamenkommunalvalg.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -24,8 +25,9 @@ public class Candidate {    //De beholdes i programmet midlertidigt, men skal no
     @Column(name = "candidate_name")
     private String candidateName;
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "party_id")
+    @JsonBackReference
     public Party party;
 
     @Override

@@ -14,7 +14,7 @@ import java.net.URISyntaxException;
 import java.util.List;
 import java.util.Set;
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @CrossOrigin
 public class CandidateRestController { //Bruges til alt omhandlende candidates
 
@@ -44,14 +44,14 @@ public class CandidateRestController { //Bruges til alt omhandlende candidates
 
     @PostMapping("/candidate")
     public ResponseEntity<Candidate> createCandidate(@RequestBody Candidate candidate) throws URISyntaxException {
-        Candidate result = null;
-        result = candidateService.saveCandidate(candidate);
-        return ResponseEntity.created(new URI("/candidate/" + result.getCandidateId())).body(result);
+        Candidate tmpCandidate = null;
+        tmpCandidate = candidateService.saveCandidate(candidate);
+        return ResponseEntity.created(new URI("/candidate/" + tmpCandidate.getCandidateId())).body(tmpCandidate);
     }
 
     @PutMapping("/candidate/{id}")
-    public ResponseEntity<Candidate> updateCandidate(@PathVariable Integer id, @RequestBody EditCandidate editCandidate) {
-        Candidate tmpCandidate = candidateService.updateCandidate(editCandidate, id);
+    public ResponseEntity<Candidate> updateCandidate(@PathVariable Integer id, @RequestBody Candidate candidate) {
+        Candidate tmpCandidate = candidateService.updateCandidate(candidate, id);
         return ResponseEntity.ok().body(tmpCandidate);
     }
 

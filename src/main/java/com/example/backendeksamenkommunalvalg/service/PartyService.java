@@ -24,6 +24,10 @@ public class PartyService {
         return partyRepository.findById(id).orElseThrow(() -> new NoResultException("Party with id: " + id + " doesn't exist"));
     }
 
+    public List<Party> findAllParties() {
+        return partyRepository.findAll();
+    }
+
     public Party findPartyByPartyName(String name) {
         return partyRepository.findPartyByPartyName(name);
     }
