@@ -27,7 +27,6 @@ public class Candidate {    //De beholdes i programmet midlertidigt, men skal no
 
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "party_id")
-    @JsonBackReference
     public Party party;
 
     @Override

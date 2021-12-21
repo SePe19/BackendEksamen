@@ -30,6 +30,7 @@ public class Party {    //De beholdes i programmet midlertidigt, men skal nok fj
     @Column(name = "party_name")
     private String partyName;
 
+
     @OneToMany(cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "party_id")
     @JsonBackReference
